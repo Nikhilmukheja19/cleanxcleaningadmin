@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState("Today");
   const isLoggedIn = true;
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const BASE_URL = "https://cleanxcleaningbackend.onrender.com";
 
   const filterLabels = {
     Today: "Today",
