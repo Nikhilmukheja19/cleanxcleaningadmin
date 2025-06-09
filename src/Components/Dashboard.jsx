@@ -102,18 +102,18 @@ const Dashboard = () => {
   const filteredOrders = filterOrders(orders);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-50 px-6 py-10">
-      <h1 className="text-3xl font-bold text-blue-900 mb-6 text-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-50 px-4 sm:px-6 py-6 sm:py-10">
+      <h1 className="text-2xl sm:text-3xl font-bold text-blue-900 mb-6 text-center">
         🧼 Admin Dashboard
       </h1>
 
-      <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 overflow-x-auto">
-        <div className="flex flex-wrap gap-4 justify-end mb-6">
+      <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 border border-gray-200">
+        <div className="flex flex-wrap gap-2 sm:gap-4 justify-center sm:justify-end mb-4">
           {Object.keys(filterLabels).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-md text-white ${
+              className={`px-4 py-2 rounded-md text-white text-sm sm:text-base ${
                 filter === f ? "bg-blue-700" : "bg-blue-500 hover:bg-blue-600"
               }`}
             >
@@ -122,52 +122,62 @@ const Dashboard = () => {
           ))}
         </div>
 
-        <table className="min-w-full text-left text-sm">
-          <thead>
-            <tr className="bg-blue-100 text-gray-800">
-              <th className="px-4 py-2 border">Order ID</th>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Email</th>
-              <th className="px-4 py-2 border">Phone</th>
-              <th className="px-4 py-2 border">Date & Time</th>
-              <th className="px-4 py-2 border">Address</th>
-              <th className="px-4 py-2 border">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredOrders.map((order) => (
-              <tr key={order.orderId} className="hover:bg-gray-50 transition">
-                <td className="px-4 py-2 border">#{order.orderId}</td>
-                <td className="px-4 py-2 border">{order.fullName}</td>
-                <td className="px-4 py-2 border">{order.email}</td>
-                <td className="px-4 py-2 border">{order.phone}</td>
-                <td className="px-4 py-2 border">
-                  {new Date(order.dateTime).toLocaleString("en-IN", {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                  })}
-                </td>
-                <td className="px-4 py-2 border">
-                  {order.street}, {order.city}, {order.state} - {order.zip}
-                </td>
-                <td
-                  className="px-4 py-2 border cursor-pointer"
-                  onClick={() => toggleStatus(order.orderId)}
-                >
-                  {order.status === "Fulfilled" ? (
-                    <span className="flex items-center text-green-600">
-                      <FaCheckCircle className="mr-1" /> Fulfilled
-                    </span>
-                  ) : (
-                    <span className="flex items-center text-yellow-600">
-                      <FaHourglassHalf className="mr-1" /> Pending
-                    </span>
-                  )}
-                </td>
+        <div className="overflow-x-auto w-full">
+          <table className="min-w-full text-left text-sm">
+            <thead>
+              <tr className="bg-blue-100 text-gray-800 whitespace-nowrap">
+                <th className="px-4 py-2 border">Order ID</th>
+                <th className="px-4 py-2 border">Name</th>
+                <th className="px-4 py-2 border">Email</th>
+                <th className="px-4 py-2 border">Phone</th>
+                <th className="px-4 py-2 border">Date & Time</th>
+                <th className="px-4 py-2 border">Address</th>
+                <th className="px-4 py-2 border">Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredOrders.map((order) => (
+                <tr key={order.orderId} className="hover:bg-gray-50 transition">
+                  <td className="px-4 py-2 border whitespace-nowrap">
+                    #{order.orderId}
+                  </td>
+                  <td className="px-4 py-2 border whitespace-nowrap">
+                    {order.fullName}
+                  </td>
+                  <td className="px-4 py-2 border whitespace-nowrap">
+                    {order.email}
+                  </td>
+                  <td className="px-4 py-2 border whitespace-nowrap">
+                    {order.phone}
+                  </td>
+                  <td className="px-4 py-2 border whitespace-nowrap">
+                    {new Date(order.dateTime).toLocaleString("en-IN", {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    })}
+                  </td>
+                  <td className="px-4 py-2 border whitespace-nowrap">
+                    {order.street}, {order.city}, {order.state} - {order.zip}
+                  </td>
+                  <td
+                    className="px-4 py-2 border cursor-pointer whitespace-nowrap"
+                    onClick={() => toggleStatus(order.orderId)}
+                  >
+                    {order.status === "Fulfilled" ? (
+                      <span className="flex items-center text-green-600">
+                        <FaCheckCircle className="mr-1" /> Fulfilled
+                      </span>
+                    ) : (
+                      <span className="flex items-center text-yellow-600">
+                        <FaHourglassHalf className="mr-1" /> Pending
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
