@@ -21,6 +21,7 @@ const Login = () => {
       });
 
       if (loginresponse) {
+        localStorage.setItem("token", loginresponse.data.token);
         navigate("/");
       }
     } catch (error) {
