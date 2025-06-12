@@ -23,6 +23,8 @@ const Login = () => {
       if (loginresponse) {
         localStorage.setItem("token", loginresponse.data.token);
         navigate("/");
+      } else {
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
