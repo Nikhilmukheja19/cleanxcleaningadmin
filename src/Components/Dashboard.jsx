@@ -8,6 +8,7 @@ const Dashboard = () => {
   const [filter, setFilter] = useState("Today");
   const isLoggedIn = true;
   const BASE_URL = "https://cleanxcleaningbackend.onrender.com";
+  // const BASE_URL = "http://localhost:5000";
 
   const filterLabels = {
     Today: "Today",
@@ -32,7 +33,17 @@ const Dashboard = () => {
     fetchOrders();
   }, []);
 
-  const toggleStatus = (id) => {
+  const toggleStatus = async (id) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/order/orderUpdatemail/${id}`
+      );
+      if (response) {
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
     setOrders((prev) =>
       prev.map((order) =>
         order.orderId === id
